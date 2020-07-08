@@ -1,6 +1,6 @@
 //
 //  SlamButtonView.swift
-//  SlamCocoa
+//  SlamMacOSKit
 //
 //  Created by Sheets, Steve on 5/28/17.
 //  Copyright © 2017 Sheets, Steve. All rights reserved.

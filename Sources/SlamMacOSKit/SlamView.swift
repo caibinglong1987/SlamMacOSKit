@@ -1,6 +1,6 @@
 //
 //  SlamView.swift
-//  SlamCocoa
+//  SlamMacOSKit
 //
 //  Created by Steve Sheets on 2/4/18.
 //  Copyright © 2018 Zodiac Innovations. All rights reserved.
