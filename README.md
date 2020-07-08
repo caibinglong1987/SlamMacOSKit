@@ -1,3 +1,3 @@
 # SlamMacOSKit
 
-A description of this package.
+Fast Closure based Framework for MacOS.
