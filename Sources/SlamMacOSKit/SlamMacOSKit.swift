@@ -1,3 +1,7 @@
-struct SlamMacOSKit {
-    var text = "Hello, World!"
+// MARK: Structure
+
+/// Abstract Structrure
+public struct SlamMacOSKit {
+    /// Version
+    public static var kitVersion = 1
 }

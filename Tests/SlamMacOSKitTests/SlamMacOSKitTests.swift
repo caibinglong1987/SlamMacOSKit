@@ -2,14 +2,12 @@ import XCTest
 @testable import SlamMacOSKit
 
 final class SlamMacOSKitTests: XCTestCase {
-    func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        XCTAssertEqual(SlamMacOSKit().text, "Hello, World!")
+    
+    func testKit() {
+        XCTAssert(SlamMacOSKit.kitVersion==1, "Check Version")
     }
 
     static var allTests = [
-        ("testExample", testExample),
+        ("testKit", testKit),
     ]
 }

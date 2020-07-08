@@ -26,6 +26,6 @@ let package = Package(
             dependencies: []),
         .testTarget(
             name: "SlamMacOSKitTests",
-            dependencies: ["SlamMacOSKit"]),
+            dependencies: ["SlamKit", "SlamMacOSKit"]),
     ]
 )
