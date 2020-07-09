@@ -12,11 +12,6 @@ import SlamKit
 
 import Cocoa
 
-public struct dummyKit {
-    /// Version
-    public static var kitVersion = 1
-}
-
 // MARK: Class
 
 /// Closure based simple view.
