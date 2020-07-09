@@ -1,5 +1,5 @@
 //
-//  SlamLabelView.swift
+//  SlamLabel.swift
 //  SlamMacOSKit
 //
 //  Created by Sheets, Steve on 5/27/17.
@@ -15,7 +15,7 @@ import Cocoa
 // MARK: Class
 
 /// Slam Based Label style Text Field
-public class SlamLabelView: NSTextField, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable {
+public class SlamLabel: NSTextField, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable {
     
     // MARK: SlamReferable requirements
     

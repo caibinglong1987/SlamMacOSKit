@@ -1,5 +1,5 @@
 //
-//  SlamButtonView.swift
+//  SlamButton.swift
 //  SlamMacOSKit
 //
 //  Created by Sheets, Steve on 5/28/17.
@@ -15,7 +15,7 @@ import Cocoa
 // MARK: Class
 
 /// Closure based button
-public class SlamButtonView: NSButton, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamActionable {
+public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamActionable {
 
     // MARK: SlamReferable requirements
     
