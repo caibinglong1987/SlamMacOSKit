@@ -6,15 +6,18 @@
 //  Copyright © 2017 Sheets, Steve. All rights reserved.
 //
 
-import Cocoa
 import SlamKit
 
-// MARK: - Class
+#if os(macOS)
+
+import Cocoa
+
+// MARK: Class
 
 /// Slam Based Label style Text Field
 public class SlamLabelView: NSTextField, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable {
     
-    // MARK: - SlamReferable requirements
+    // MARK: SlamReferable requirements
     
     @IBInspectable public var slamReferral: String = ""
 
@@ -22,7 +25,7 @@ public class SlamLabelView: NSTextField, SlamReferable, SlamVisibleable, SlamEna
 
     @IBInspectable public var slamTag: Int = 0
 
-    // MARK: - SlamVisibleable Requirements
+    // MARK: SlamVisibleable Requirements
     
     public var slamVisibleState: Bool {
         get {
@@ -45,7 +48,7 @@ public class SlamLabelView: NSTextField, SlamReferable, SlamVisibleable, SlamEna
         ui.slamUpdateLabel()
     }
 
-    // MARK: - SlamEnableable Requirements
+    // MARK: SlamEnableable Requirements
     
     public var slamEnabledState: Bool {
         get {
@@ -58,7 +61,7 @@ public class SlamLabelView: NSTextField, SlamReferable, SlamVisibleable, SlamEna
 
     public var slamEnableDataSource: SlamKit.ActionBoolClosure?
 
-    // MARK: - SlamLabelable Requirements
+    // MARK: SlamLabelable Requirements
     
     public var slamLabeledState: String {
         get {
@@ -75,4 +78,4 @@ public class SlamLabelView: NSTextField, SlamReferable, SlamVisibleable, SlamEna
 
 }
 
-
+#endif

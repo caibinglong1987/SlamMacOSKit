@@ -6,10 +6,13 @@
 //  Copyright © 2017 Sheets, Steve. All rights reserved.
 //
 
-import Cocoa
 import SlamKit
 
-// MARK: - Extensions
+#if os(macOS)
+
+import Cocoa
+
+// MARK: Extensions
 
 extension NSView {
     
@@ -44,4 +47,6 @@ extension NSView {
     }
     
 }
+
+#endif
 

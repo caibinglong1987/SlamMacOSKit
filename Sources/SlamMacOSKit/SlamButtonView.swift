@@ -6,23 +6,18 @@
 //  Copyright © 2017 Sheets, Steve. All rights reserved.
 //
 
-import Cocoa
 import SlamKit
 
-protocol testme1  {
-    func test1()
-}
+#if os(macOS)
 
-protocol testme2: class  {
-    func test2()
-}
+import Cocoa
 
-// MARK: - Class
+// MARK: Class
 
 /// Closure based button
 public class SlamButtonView: NSButton, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamActionable {
 
-    // MARK: - SlamReferable requirements
+    // MARK: SlamReferable requirements
     
     @IBInspectable public var slamReferral: String = ""
 
@@ -30,7 +25,7 @@ public class SlamButtonView: NSButton, SlamReferable, SlamVisibleable, SlamEnabl
 
     @IBInspectable public var slamTag: Int = 0
 
-    // MARK: - SlamVisibleable Requirements
+    // MARK: SlamVisibleable Requirements
     
     public var slamVisibleState: Bool {
         get {
@@ -53,7 +48,7 @@ public class SlamButtonView: NSButton, SlamReferable, SlamVisibleable, SlamEnabl
         ui.slamUpdateLabel()
     }
 
-    // MARK: - SlamEnableable Requirements
+    // MARK: SlamEnableable Requirements
     
     public var slamEnabledState: Bool {
         get {
@@ -66,7 +61,7 @@ public class SlamButtonView: NSButton, SlamReferable, SlamVisibleable, SlamEnabl
 
     public var slamEnableDataSource: SlamKit.ActionBoolClosure?
 
-    // MARK: - SlamLabelable Requirements
+    // MARK: SlamLabelable Requirements
     
     public var slamLabeledState: String {
         get {
@@ -81,11 +76,11 @@ public class SlamButtonView: NSButton, SlamReferable, SlamVisibleable, SlamEnabl
 
     public var slamLabelDataSource: SlamKit.ActionStringClosure?
 
-    // MARK: - SlamActionable
+    // MARK: SlamActionable
     
     public var slamActionClosure: SlamKit.ActionClosure?
     
-    // MARK: - Lifecycle Methods
+    // MARK: Lifecycle Methods
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -109,7 +104,7 @@ public class SlamButtonView: NSButton, SlamReferable, SlamVisibleable, SlamEnabl
         }
     }
     
-    // MARK: - Action Methods
+    // MARK: Action Methods
     
     /// Action to invoked with user presses button.
     /// - Parameter sender: Object that invoked the method
@@ -118,5 +113,7 @@ public class SlamButtonView: NSButton, SlamReferable, SlamVisibleable, SlamEnabl
     }
 
 }
+
+#endif
 
 

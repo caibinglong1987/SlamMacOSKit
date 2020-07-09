@@ -3,11 +3,11 @@ import XCTest
 
 final class SlamMacOSKitTests: XCTestCase {
     
-    func testKit() {
-        XCTAssert(SlamMacOSKit.kitVersion==1, "Check Version")
-    }
-
     static var allTests = [
         ("testKit", testKit),
     ]
+
+    func testKit() {
+        XCTAssert(SlamMacOSKit.kitVersion==1, "Check Version")
+    }
 }

@@ -6,13 +6,23 @@
 //  Copyright © 2018 Zodiac Innovations. All rights reserved.
 //
 
-import Cocoa
 import SlamKit
-// MARK: - Class
+
+#if os(macOS)
+
+import Cocoa
+
+public struct dummyKit {
+    /// Version
+    public static var kitVersion = 1
+}
+
+// MARK: Class
 
 /// Closure based simple view.
 public class SlamView: NSView, SlamReferable, SlamVisibleable {
-    // MARK: - SlamReferable Requirments
+    
+    // MARK: SlamReferable Requirments
     
     @IBInspectable public var slamReferral: String = ""
 
@@ -20,7 +30,7 @@ public class SlamView: NSView, SlamReferable, SlamVisibleable {
 
     @IBInspectable public var slamTag: Int = 0
 
-    // MARK: - SlamVisibleable Requirements
+    // MARK: SlamVisibleable Requirements
     
     public var slamVisibleState: Bool {
         get {
@@ -42,4 +52,6 @@ public class SlamView: NSView, SlamReferable, SlamVisibleable {
     }
 
 }
+
+#endif
 
