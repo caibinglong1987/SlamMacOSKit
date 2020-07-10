@@ -13,13 +13,7 @@ public struct SlamMacOSKit {
 
     // MARK: Static Constants
     
-    /// Major Version
-    public static var kitMajorVersion = 0
-    
-    /// Mnior Version
-    public static var kitMinorVersion = 0
-    
-    /// Patch Version
-    public static var kitPatchVersion = 2
-    
+    /// Version tuple (Major version, Minor Version, Patch Version)
+    public static var kitVersion = (0, 0, 2)
+
 }

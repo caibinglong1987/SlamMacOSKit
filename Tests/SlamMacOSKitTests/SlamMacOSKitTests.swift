@@ -8,6 +8,8 @@ final class SlamMacOSKitTests: XCTestCase {
     ]
 
     func testKit() {
-        XCTAssert(SlamMacOSKit.kitMajorVersion==0 && SlamMacOSKit.kitMinorVersion==0, "Correct Kit Version")
+        let (major, minor, _) = SlamMacOSKit.kitVersion
+        XCTAssert(major==0 && minor==0, "Correct Kit Version")
     }
+
 }
