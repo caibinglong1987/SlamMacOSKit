@@ -1,18 +1,15 @@
 //
-//  SlamLabel.swift
-//  SlamMacOSKit
+//  SlamTextField.swift
+//  SlamCocoa
 //
-//  Created by Sheets, Steve on 5/27/17.
-//  Copyright © 2017 Sheets, Steve. All rights reserved.
+//  Created by Steve Sheets on 3/29/20.
 //
 
 import Cocoa
 import SlamKit
 
-// MARK: Class
-
-/// Slam Based Label style Text Field
-public class SlamLabel: NSTextField, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable {
+/// Slam Based input style Text Field
+public class SlamTextField: NSTextField, NSTextFieldDelegate, SlamReferable, SlamVisibleable, SlamEnableable, SlamTextInputable {
     
     // MARK: SlamReferable requirements
     
@@ -42,7 +39,7 @@ public class SlamLabel: NSTextField, SlamReferable, SlamVisibleable, SlamEnablea
         
         ui.slamUpdateVisible()
         ui.slamUpdateEnable()
-        ui.slamUpdateLabel()
+        ui.slamUpdateTextInput()
     }
 
     // MARK: SlamEnableable Requirements
@@ -58,11 +55,11 @@ public class SlamLabel: NSTextField, SlamReferable, SlamVisibleable, SlamEnablea
 
     public var slamEnableDataSource: SlamKit.ActionBoolClosure?
 
-    // MARK: SlamLabelable Requirements
+    // MARK: - SlamTextInputable Requirements
     
-    public var slamLabeledState: String {
+    public var slamTextState: String {
         get {
-            stringValue
+            return stringValue
         }
         set(value) {
             if value != stringValue {
@@ -70,7 +67,32 @@ public class SlamLabel: NSTextField, SlamReferable, SlamVisibleable, SlamEnablea
             }
         }
     }
+    
+    public var slamTextDataSource: SlamKit.ActionStringClosure?
+    
+    public var slamTextChangedEvent: SlamKit.InformStringClosure?
 
-    public var slamLabelDataSource: SlamKit.ActionStringClosure?
+    // MARK: - Lifecycle
 
+    public override init(frame frameRect: NSRect) {
+        super.init(frame: frameRect)
+        
+        delegate = self
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        delegate = self
+    }
+    
+    // MARK: - NSControlTextEditingDelegate Methods
+    
+    public func controlTextDidChange(_ obj: Notification) {
+        if let block = slamTextChangedEvent {
+            block(stringValue)
+        }
+    }
+    
 }
+

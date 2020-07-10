@@ -6,11 +6,8 @@
 //  Copyright © 2018 Zodiac Innovations. All rights reserved.
 //
 
-import SlamKit
-
-#if os(macOS)
-
 import Cocoa
+import SlamKit
 
 // MARK: Class
 
@@ -47,6 +44,3 @@ public class SlamView: NSView, SlamReferable, SlamVisibleable {
     }
 
 }
-
-#endif
-

@@ -10,6 +10,16 @@
 
 /// Abstract Structrure
 public struct SlamMacOSKit {
-    /// Version
-    public static var kitVersion = 1
+
+    // MARK: Static Constants
+    
+    /// Major Version
+    public static var kitMajorVersion = 0
+    
+    /// Mnior Version
+    public static var kitMinorVersion = 0
+    
+    /// Patch Version
+    public static var kitPatchVersion = 2
+    
 }

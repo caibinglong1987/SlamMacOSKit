@@ -1,19 +1,17 @@
 //
-//  SlamButton.swift
-//  SlamMacOSKit
+//  SlamSwitch.swift
+//  SlamCocoa
 //
-//  Created by Sheets, Steve on 5/28/17.
-//  Copyright © 2017 Sheets, Steve. All rights reserved.
+//  Created by Steve Sheets on 4/8/20.
+//  Copyright © 2020 Steve Sheets. All rights reserved.
 //
 
 import Cocoa
 import SlamKit
 
-// MARK: Class
-
-/// Closure based button
-public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamActionable {
-
+@available(OSX 10.15, *)
+public class SlamSwitch: NSSwitch, SlamReferable, SlamVisibleable, SlamEnableable, SlamSwitchable {
+    
     // MARK: SlamReferable requirements
     
     @IBInspectable public var slamReferral: String = ""
@@ -42,9 +40,9 @@ public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableabl
         
         ui.slamUpdateVisible()
         ui.slamUpdateEnable()
-        ui.slamUpdateLabel()
+        ui.slamUpdateSwitch()
     }
-
+    
     // MARK: SlamEnableable Requirements
     
     public var slamEnabledState: Bool {
@@ -58,57 +56,54 @@ public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableabl
 
     public var slamEnableDataSource: SlamKit.ActionBoolClosure?
 
-    // MARK: SlamLabelable Requirements
+    // MARK: - SlamSwitchable Requirement
     
-    public var slamLabeledState: String {
+    public var slamSwitchState: Bool {
         get {
-            title
+            return (state == .on)
         }
         set(value) {
-            if value != title {
-                title = value
+            if value {
+                if state != .on {
+                    state = .on
+                }
+            }
+            else {
+                if state != .off {
+                    state = .off
+                }
             }
         }
     }
 
-    public var slamLabelDataSource: SlamKit.ActionStringClosure?
+    public var slamSwitchDataSource: SlamKit.ActionBoolClosure?
+    
+    public var slamSwitchChangedEvent: SlamKit.InformBoolClosure?
 
-    // MARK: SlamActionable
-    
-    public var slamActionClosure: SlamKit.ActionClosure?
-    
-    // MARK: Lifecycle Methods
-    
+    // MARK: - Lifecycle Methods
+
     override init(frame frameRect: NSRect) {
-        super.init(frame: frameRect)
-        
-        self.setButtonType(.momentaryPushIn)
-        self.allowsMixedState = false
-        if self.target == nil {
-            self.target = self
-            self.action = #selector(pressedButtonAction)
-        }
+       super.init(frame: frameRect)
+       
+       self.target = self
+       self.action = #selector(pressedButtonAction)
     }
-    
+
     required public init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        self.setButtonType(.momentaryPushIn)
-        self.allowsMixedState = false
-        if self.target == nil {
-            self.target = self
-            self.action = #selector(pressedButtonAction)
-        }
+       super.init(coder: coder)
+       
+       self.target = self
+       self.action = #selector(pressedButtonAction)
     }
-    
-    // MARK: Action Methods
-    
+
+    // MARK: - Action Methods
+
     /// Action to invoked with user presses button.
     /// - Parameter sender: Object that invoked the method
     @objc func pressedButtonAction(sender: Any!) {
-        slamPerformAction()
+       if let block = slamSwitchChangedEvent {
+           block((state == .on))
+       }
     }
-
+    
 }
-
-
