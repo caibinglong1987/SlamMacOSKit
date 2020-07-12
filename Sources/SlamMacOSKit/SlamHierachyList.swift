@@ -34,7 +34,7 @@ open class SlamHierachyList: NSObject, SlamHierarchable {
     
     // MARK: Lifecycle
     
-    init(title: String = "", items: [SlamHierarchable] = [], cellDataSource: SlamMacOSKit.TableCellDataSourceClosure? = nil) {
+    public init(title: String = "", items: [SlamHierarchable] = [], cellDataSource: SlamMacOSKit.TableCellDataSourceClosure? = nil) {
         self.slamTitle = title
         self.slamHierarchyList = items
         self.slamCellDataSource = cellDataSource
