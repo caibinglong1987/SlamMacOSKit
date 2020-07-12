@@ -1,6 +1,6 @@
 //
 //  SlamTextField.swift
-//  SlamCocoa
+//  SlamMacOSKit
 //
 //  Created by Steve Sheets on 3/29/20.
 //
