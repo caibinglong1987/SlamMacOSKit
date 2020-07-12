@@ -3,7 +3,7 @@
 //  SlamMacOSKit
 //
 //  Created by Sheets, Steve on 7/8/17.
-//  Copyright © 2017 Sheets, Steve. All rights reserved.
+//  Copyright © 2020 Sheets, Steve. All rights reserved.
 //
 
 import Cocoa
