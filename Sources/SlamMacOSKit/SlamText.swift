@@ -12,7 +12,7 @@ import SlamKit
 // MARK: - Class
 
 /// Slam Based Text View
-class SlamText: NSTextView, NSTextDelegate, NSTextViewDelegate, SlamReferable, SlamVisibleable, SlamTextInputable {
+public class SlamText: NSTextView, NSTextDelegate, NSTextViewDelegate, SlamReferable, SlamVisibleable, SlamTextInputable {
     
     // MARK: SlamReferable requirements
     

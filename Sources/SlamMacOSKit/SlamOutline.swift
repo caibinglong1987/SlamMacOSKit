@@ -12,18 +12,18 @@ import SlamKit
 // MARK: Class
 
 /// Slam Based OutlineView
-class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate, SlamReferable, SlamVisibleable {
+public class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate, SlamReferable, SlamVisibleable {
 
     // MARK: Public Properties
     
     /// List of items to display in outline
-    var slamHierharcyList: [AnyObject]?
+    public var slamHierharcyList: [AnyObject]?
     
     /// Closure to invoke when making Table Cells (if blank, used standard text table view cells).
-    var slamMakeTableCell: SlamMacOSKit.TableCellDataSourceClosure?
+    public var slamMakeTableCell: SlamMacOSKit.TableCellDataSourceClosure?
     
     // Flag to indicate the groups items should use group UI
-    var slamUseGroupUI = true
+    public var slamUseGroupUI = true
     
     // MARK: SlamReferable requirements
     
@@ -76,7 +76,7 @@ class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate
     
     // MARK: - NSOutlineViewDataSource Methods
     
-    func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
+    public func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if item==nil {
             if let list = slamHierharcyList {
                 return list.count
@@ -102,7 +102,7 @@ class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate
         return 0
     }
     
-    func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
+    public func outlineView(_ outlineView: NSOutlineView, child index: Int, ofItem item: Any?) -> Any {
         var useList: [Any] = []
 
         if item == nil {
@@ -140,7 +140,7 @@ class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate
         return 0
     }
     
-    func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
+    public func outlineView(_ outlineView: NSOutlineView, isItemExpandable item: Any) -> Bool {
         if let hierarchy = item as? SlamHierarchable {
             return hierarchy.slamHasList
         }
@@ -153,7 +153,7 @@ class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate
     
 // MARK: - NSOutlineViewDelegate Methods
 
-    func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
+    public func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let width = Int(tableColumn?.width ?? 1000 )
 
         if let hierarchy = item as? SlamHierachyList {
@@ -173,7 +173,7 @@ class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewDelegate
         return NSTableCellView()
     }
     
-    func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
+    public func outlineView(_ outlineView: NSOutlineView, isGroupItem item: Any) -> Bool {
         guard slamUseGroupUI else { return false }
         
         if let hierarchy = item as? SlamHierachyList {

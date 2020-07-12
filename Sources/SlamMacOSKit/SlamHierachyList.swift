@@ -12,7 +12,7 @@ import SlamKit
 // MARK: - Class
 
 /// Structure holding named list of Hierachys
-public class SlamHierachyList: NSObject, SlamHierarchable {
+open class SlamHierachyList: NSObject, SlamHierarchable {
     
     // MARK: Public Properties
     
