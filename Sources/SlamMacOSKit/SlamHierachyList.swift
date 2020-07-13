@@ -18,23 +18,23 @@ open class SlamHierachyList: NSObject, SlamHierarchable {
     
     public var slamCellDataSource: SlamMacOSKit.TableCellDataSourceClosure?
     
-    public var slamHierarchyListDataSource: SlamKit.AnyObjectListDataSourceClosure?
-    
-    public var slamHierarchyCountDataSource: SlamKit.ReturnIntClosure?
-    
-    public var slamListItemDataSource: SlamKit.IntForAnyObjectDataSourceClosure?
-
     // MARK: SlamTitleable Requirements
     
     public var slamTitle: String = ""
     
     // MARK: SlamHierarchable Requirements
     
-    public var slamHierarchyList: [AnyObject]?
+    public var slamHierarchyList: [Any]?
+    
+    public var slamHierarchyListDataSource: SlamKit.AnyListDataSourceClosure?
+    
+    public var slamHierarchyCountDataSource: SlamKit.ReturnIntClosure?
+    
+    public var slamListItemDataSource: SlamKit.IntForAnyDataSourceClosure?
 
     // MARK: Lifecycle
     
-    public init(title: String = "", items: [AnyObject] = [], cellDataSource: SlamMacOSKit.TableCellDataSourceClosure? = nil) {
+    public init(title: String = "", items: [Any] = [], cellDataSource: SlamMacOSKit.TableCellDataSourceClosure? = nil) {
         self.slamTitle = title
         self.slamHierarchyList = items
         self.slamCellDataSource = cellDataSource
