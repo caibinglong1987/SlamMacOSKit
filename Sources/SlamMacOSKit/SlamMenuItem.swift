@@ -81,7 +81,7 @@ import SlamKit
                 self.isEnabled =  source(self)
             }
 
-            return task.validateTask(reference: self)
+            return task.validateTask(self)
         }
         
         return false
@@ -93,7 +93,7 @@ import SlamKit
     /// - Parameter sender: Object that invoked the method
     @objc @IBAction public func slamMenuAction(_ sender: Any) {
         if let block = slamActionClosure {
-            block(self.slamWord, self.slamTag)
+            block(self)
             
             return
         }
