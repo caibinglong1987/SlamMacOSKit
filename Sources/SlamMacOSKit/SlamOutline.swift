@@ -48,15 +48,17 @@ public class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
     
     public var slamVisibleDataSource: SlamKit.ActionBoolClosure?
 
-    public func slamUpdateUI() {
+    public func slamUpdateUI(reload: Bool) {
         var ui = self
         
         ui.slamUpdateVisible()
         
-        reloadData()
+        if reload {
+            reloadData()
+        }
     }
     
-    // MARK: - Lifecycle Methods
+    // MARK: Lifecycle Functions
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -74,7 +76,7 @@ public class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         allowsMultipleSelection = false
     }
     
-    // MARK: - NSOutlineViewDataSource Methods
+    // MARK: NSOutlineViewDataSource Functions
     
     public func outlineView(_ outlineView: NSOutlineView, numberOfChildrenOfItem item: Any?) -> Int {
         if item==nil {
@@ -151,7 +153,7 @@ public class SlamOutline: NSOutlineView, NSOutlineViewDataSource, NSOutlineViewD
         return false
     }
     
-// MARK: - NSOutlineViewDelegate Methods
+// MARK: NSOutlineViewDelegate Functions
 
     public func outlineView(_ outlineView: NSOutlineView, viewFor tableColumn: NSTableColumn?, item: Any) -> NSView? {
         let width = Int(tableColumn?.width ?? 1000 )

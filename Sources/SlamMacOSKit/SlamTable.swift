@@ -35,14 +35,16 @@ public class SlamTable: NSTableView, NSTableViewDelegate, NSTableViewDataSource,
     
     public var slamVisibleDataSource: SlamKit.ActionBoolClosure?
 
-    public func slamUpdateUI() {
+    public func slamUpdateUI(reload: Bool){
         var ui = self
         
         ui.slamUpdateVisible()
         ui.slamUpdateEnable()
 
         
-        reloadData()
+        if reload {
+            reloadData()
+        }
     }
 
     // MARK: SlamEnableable Requirements
@@ -58,7 +60,7 @@ public class SlamTable: NSTableView, NSTableViewDelegate, NSTableViewDataSource,
 
     public var slamEnableDataSource: SlamKit.ActionBoolClosure?
 
-    // MARK: - SlamListable Requirements
+    // MARK: SlamListable Requirements
 
     public var slamList: [String]?
     
@@ -68,7 +70,7 @@ public class SlamTable: NSTableView, NSTableViewDelegate, NSTableViewDataSource,
     
     public var slamListItemDataSource: SlamKit.IntReturnStringClosure?
 
-    // MARK: - SlamNumberable Requirements
+    // MARK: SlamNumberable Requirements
 
     public var slamNumberState: Int {
         get {
@@ -83,7 +85,7 @@ public class SlamTable: NSTableView, NSTableViewDelegate, NSTableViewDataSource,
     
     public var slamNumberChangedEvent: SlamKit.InformIntClosure?
 
-    // MARK: - Lifecycle Methods
+    // MARK: Lifecycle Functions
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -101,19 +103,17 @@ public class SlamTable: NSTableView, NSTableViewDelegate, NSTableViewDataSource,
         allowsMultipleSelection = false
     }
     
-    // MARK: - NSTableViewDelegate
+    // MARK: NSTableViewDelegate
     
     public func tableViewSelectionDidChange(_ notification: Notification) {
-        if let event = slamNumberChangedEvent {
-            event(self.selectedRow)
-        }
+        slamNumberChangedAction()
     }
     
     public func tableView(_ tableView: NSTableView, shouldEdit tableColumn: NSTableColumn?, row: Int) -> Bool {
         return false
     }
     
-    // MARK: - DataNSTableViewDataSource
+    // MARK: DataNSTableViewDataSource
     
     public func numberOfRows(in tableView: NSTableView) -> Int {
         if let source = slamCountDataSource {

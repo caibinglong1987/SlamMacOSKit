@@ -13,8 +13,7 @@ import SlamKit
 
 extension NSObject {
     
-    // MARK: Public Method
-    
+    // MARK: Public Functions
     
     /// Get the title (string) of object, using slamTitle if available, otherwise use description.
     var slamGetTitle: String {

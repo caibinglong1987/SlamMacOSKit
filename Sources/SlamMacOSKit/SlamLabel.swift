@@ -37,7 +37,7 @@ public class SlamLabel: NSTextField, SlamReferable, SlamVisibleable, SlamEnablea
     
     public var slamVisibleDataSource: SlamKit.ActionBoolClosure?
 
-    public func slamUpdateUI() {
+    public func slamUpdateUI(reload: Bool){
         var ui = self
         
         ui.slamUpdateVisible()

@@ -34,7 +34,7 @@ public class SlamTextField: NSTextField, NSTextFieldDelegate, SlamReferable, Sla
     
     public var slamVisibleDataSource: SlamKit.ActionBoolClosure?
 
-    public func slamUpdateUI() {
+    public func slamUpdateUI(reload: Bool) {
         var ui = self
         
         ui.slamUpdateVisible()
@@ -55,7 +55,7 @@ public class SlamTextField: NSTextField, NSTextFieldDelegate, SlamReferable, Sla
 
     public var slamEnableDataSource: SlamKit.ActionBoolClosure?
 
-    // MARK: - SlamTextInputable Requirements
+    // MARK: SlamTextInputable Requirements
     
     public var slamTextState: String {
         get {
@@ -72,7 +72,7 @@ public class SlamTextField: NSTextField, NSTextFieldDelegate, SlamReferable, Sla
     
     public var slamTextChangedEvent: SlamKit.InformStringClosure?
 
-    // MARK: - Lifecycle
+    // MARK: Lifecycle
 
     public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -86,7 +86,7 @@ public class SlamTextField: NSTextField, NSTextFieldDelegate, SlamReferable, Sla
         delegate = self
     }
     
-    // MARK: - NSControlTextEditingDelegate Methods
+    // MARK: NSControlTextEditingDelegate Functions
     
     public func controlTextDidChange(_ obj: Notification) {
         if let block = slamTextChangedEvent {

@@ -13,10 +13,18 @@ import SlamKit
 
 extension NSView {
     
+    // MARK: Public Functions
+    
     /// Find specified View, looking through subview. Only check subviews that have slamReferral string.
     /// - Parameter referral: String to look for
     /// - Returns: Optional NSView that has slamRerral string that matches referral string
     public func slamFindSubView(referral: String) -> NSView? {
+        if let special = self as? SlamSpecialViewable {
+            if let v = special.slamSpecialFindSubView(referral: referral) {
+                return v
+            }
+        }
+
         for v in subviews {
             if let r = v as? SlamReferable {
                 if r.slamReferral == referral {
@@ -31,15 +39,20 @@ extension NSView {
         
         return nil
     }
-    
+
     /// Invoke slamUpdateUI in all subviews that supports the call.
-    public func slamUpdateSubUI() {
+    /// - Parameter reload: Bool indicates deep data source must be reloaded (ex: list)
+    public func slamUpdateSubUI(reload: Bool) {
+        if let special = self as? SlamSpecialViewable {
+            special.slamSpecialUpdateSubUI(reload: reload)
+        }
+        
         for v in self.subviews {
-            if var ui = v as? SlamVisibleable {
-                ui.slamUpdateUI()
+            if let ui = v as? SlamVisibleable {
+                ui.slamUpdateUI(reload: reload)
             }
             
-            v.slamUpdateSubUI()
+            v.slamUpdateSubUI(reload: reload)
         }
     }
     

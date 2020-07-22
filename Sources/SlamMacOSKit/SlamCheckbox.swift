@@ -1,9 +1,9 @@
 //
-//  SlamButton.swift
+//  SlamCheckbox.swift
 //  SlamMacOSKit
 //
-//  Created by Sheets, Steve on 5/28/17.
-//  Copyright © 2020 Sheets, Steve. All rights reserved.
+//  Created by Steve Sheets on 4/7/20.
+//  Copyright © 2020 Steve Sheets. All rights reserved.
 //
 
 import Cocoa
@@ -11,8 +11,8 @@ import SlamKit
 
 // MARK: Class
 
-/// Closure based button
-public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamActionable, SlamTaskable {
+/// Closure based checkbox
+public class SlamCheckboxView: NSButton, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamSwitchable {
 
     // MARK: SlamReferable requirements
     
@@ -43,6 +43,7 @@ public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableabl
         ui.slamUpdateVisible()
         ui.slamUpdateEnable()
         ui.slamUpdateLabel()
+        ui.slamUpdateSwitch()
     }
 
     // MARK: SlamEnableable Requirements
@@ -73,36 +74,49 @@ public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableabl
 
     public var slamLabelDataSource: SlamKit.ActionStringClosure?
 
-    // MARK: SlamActionable
+
+    // MARK: SlamSwitchable Requirement
     
-    public var slamActionClosure: SlamKit.ActionClosure?
+    public var slamSwitchState: Bool {
+        get {
+            (state == .on)
+        }
+        set(value) {
+            if value {
+                if (state != .on) {
+                    state = .on
+                }
+            }
+            else {
+                if (state != .off) {
+                    state = .off
+                }
+            }
+        }
+    }
+        
+    public var slamSwitchDataSource: SlamKit.ActionBoolClosure?
     
-    // MARK: SlamTaskable Requirement
-    
-    @IBInspectable public var slamTaskTitle: String? = nil
+    public var slamSwitchChangedEvent: SlamKit.InformBoolClosure?
 
     // MARK: Lifecycle Functions
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
-        self.setButtonType(.momentaryPushIn)
+        self.setButtonType(.switch)
         self.allowsMixedState = false
-        if self.target == nil {
-            self.target = self
-            self.action = #selector(pressedButtonAction)
-        }
+        self.target = self
+        self.action = #selector(pressedButtonAction)
     }
     
     required public init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        self.setButtonType(.momentaryPushIn)
+        self.setButtonType(.switch)
         self.allowsMixedState = false
-        if self.target == nil {
-            self.target = self
-            self.action = #selector(pressedButtonAction)
-        }
+        self.target = self
+        self.action = #selector(pressedButtonAction)
     }
     
     // MARK: Action Functions
@@ -110,15 +124,10 @@ public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableabl
     /// Action to invoked with user presses button.
     /// - Parameter sender: Object that invoked the method
     @objc func pressedButtonAction(sender: Any!) {
-        slamPerformAction(self)
-
-        guard let title = slamTaskTitle,
-            title.isNotEmpty,
-            let app = slamSharedMacApp else { return }
-            
-        app.appRunTask(referral: self, with: title, forWindow: nil)
+        slamSwitchChangedAction()
     }
 
+    
 }
 
 

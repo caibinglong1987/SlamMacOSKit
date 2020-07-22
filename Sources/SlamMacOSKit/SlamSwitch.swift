@@ -35,7 +35,7 @@ public class SlamSwitch: NSSwitch, SlamReferable, SlamVisibleable, SlamEnableabl
     
     public var slamVisibleDataSource: SlamKit.ActionBoolClosure?
 
-    public func slamUpdateUI() {
+    public func slamUpdateUI(reload: Bool){
         var ui = self
         
         ui.slamUpdateVisible()
@@ -56,7 +56,7 @@ public class SlamSwitch: NSSwitch, SlamReferable, SlamVisibleable, SlamEnableabl
 
     public var slamEnableDataSource: SlamKit.ActionBoolClosure?
 
-    // MARK: - SlamSwitchable Requirement
+    // MARK: SlamSwitchable Requirement
     
     public var slamSwitchState: Bool {
         get {
@@ -80,7 +80,7 @@ public class SlamSwitch: NSSwitch, SlamReferable, SlamVisibleable, SlamEnableabl
     
     public var slamSwitchChangedEvent: SlamKit.InformBoolClosure?
 
-    // MARK: - Lifecycle Methods
+    // MARK: Lifecycle Functions
 
     override init(frame frameRect: NSRect) {
        super.init(frame: frameRect)
@@ -96,14 +96,12 @@ public class SlamSwitch: NSSwitch, SlamReferable, SlamVisibleable, SlamEnableabl
        self.action = #selector(pressedButtonAction)
     }
 
-    // MARK: - Action Methods
+    // MARK: Action Functions
 
     /// Action to invoked with user presses button.
     /// - Parameter sender: Object that invoked the method
     @objc func pressedButtonAction(sender: Any!) {
-       if let block = slamSwitchChangedEvent {
-           block((state == .on))
-       }
+       slamSwitchChangedAction()
     }
     
 }

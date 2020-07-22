@@ -1,6 +1,6 @@
 //
 //  SlamMenuItem.swift
-//  SlamCocoa
+//  SlamMacOSKit
 //
 //  Created by Steve Sheets on 2/5/18.
 //  Copyright © 2020 Zodiac Innovations. All rights reserved.
@@ -9,12 +9,12 @@
 import Cocoa
 import SlamKit
 
-// MARK: - Class
+// MARK: Class
 
 /// Closure based version of NSMenuItem
 @objc public class SlamMenuItem: NSMenuItem, SlamReferable, SlamTaskable, SlamActionable {
     
-    // MARK: - SlamReferable Requirement
+    // MARK: SlamReferable Requirement
     
     @IBInspectable public var slamReferral: String = ""
     
@@ -22,15 +22,15 @@ import SlamKit
     
     @IBInspectable public var slamTag: Int = 0
 
-    // MARK: - SlamTaskable Requirement
+    // MARK: SlamTaskable Requirement
     
     @IBInspectable public var slamTaskTitle: String? = nil
 
-    // MARK: - SlamActionable Requirement
+    // MARK: SlamActionable Requirement
     
     public var slamActionClosure: SlamKit.ActionClosure?
 
-    // MARK: - Lifecycle Methods
+    // MARK: Lifecycle Functions
     
     public override init(title string: String, action selector: Selector?, keyEquivalent charCode: String) {
         super.init(title:string, action:selector, keyEquivalent:charCode)
@@ -53,13 +53,13 @@ import SlamKit
                 return true
             }
             
-            guard let app = slamSharedApp as? SlamBossable,
+            guard let app = slamSharedMacApp,
                 let title = self.self.slamTaskTitle,
                 title.isNotEmpty else { return false }
             
             var foundTask: SlamTask? = nil
             
-            foundTask = app.findTask(with: title)
+            foundTask = app.appFindTask(with: title, forWindow: nil)
 
             guard let task = foundTask else { return false }
             
@@ -87,22 +87,17 @@ import SlamKit
         return false
     }
     
-    // MARK: - Action Methods
+    // MARK: Action Functions
     
     /// Action to to invoked when menu item selected.
     /// - Parameter sender: Object that invoked the method
     @objc @IBAction public func slamMenuAction(_ sender: Any) {
-        if let block = slamActionClosure {
-            block(self)
-            
-            return
-        }
-        
+        slamPerformAction(self)
+
         guard let title = slamTaskTitle,
             title.isNotEmpty,
-            let app = slamSharedApp as? SlamBossable,
-            let task = app.findTask(with: title) else { return }
+            let app = slamSharedMacApp else { return }
             
-        task.runTask(self)
+        app.appRunTask(referral: self, with: title, forWindow: nil)
     }
 }

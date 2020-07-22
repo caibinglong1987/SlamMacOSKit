@@ -38,7 +38,7 @@ public struct SlamTableCellView {
         return SlamTableCellView.makeTableCell(imageName: NSImage.folderName, text: text, width: width, color: .red)
     }
 
-    // MARK: Static Methods
+    // MARK: Static Functions
     
     /// Make a Text TableCellView with provided text, width & text color.
     /// - Parameters:

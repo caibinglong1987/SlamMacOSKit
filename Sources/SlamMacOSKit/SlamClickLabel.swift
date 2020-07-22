@@ -1,9 +1,9 @@
 //
-//  SlamButton.swift
+//  SlamClickLabel.swift
 //  SlamMacOSKit
 //
-//  Created by Sheets, Steve on 5/28/17.
-//  Copyright © 2020 Sheets, Steve. All rights reserved.
+//  Created by Steve Sheets on 4/6/20.
+//  Copyright © 2020 Steve Sheets. All rights reserved.
 //
 
 import Cocoa
@@ -11,8 +11,8 @@ import SlamKit
 
 // MARK: Class
 
-/// Closure based button
-public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamActionable, SlamTaskable {
+/// Slam Based Actionable Label style Text Field
+@objcMembers public class SlamClickLabel: NSTextField, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamActionable, SlamTaskable, SlamClickGesturable {
 
     // MARK: SlamReferable requirements
     
@@ -62,11 +62,11 @@ public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableabl
     
     public var slamLabeledState: String {
         get {
-            title
+            stringValue
         }
         set(value) {
-            if value != title {
-                title = value
+            if value != stringValue {
+                stringValue = value
             }
         }
     }
@@ -81,44 +81,39 @@ public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableabl
     
     @IBInspectable public var slamTaskTitle: String? = nil
 
-    // MARK: Lifecycle Functions
+    // MARK: Lifestyle
     
-    override init(frame frameRect: NSRect) {
+    public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
-        self.setButtonType(.momentaryPushIn)
-        self.allowsMixedState = false
-        if self.target == nil {
-            self.target = self
-            self.action = #selector(pressedButtonAction)
-        }
+        textColor = .linkColor
+        allowsEditingTextAttributes = true
+            
+        SlamClickGesture.addClickGesture(self)
+
+        underline(text: stringValue)
     }
     
-    required public init?(coder: NSCoder) {
+    public required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        self.setButtonType(.momentaryPushIn)
-        self.allowsMixedState = false
-        if self.target == nil {
-            self.target = self
-            self.action = #selector(pressedButtonAction)
-        }
+        textColor = .linkColor
+        allowsEditingTextAttributes = true
+
+        SlamClickGesture.addClickGesture(self)
+
+        underline(text: stringValue)
     }
     
-    // MARK: Action Functions
+    // MARK: Public Functions
     
-    /// Action to invoked with user presses button.
-    /// - Parameter sender: Object that invoked the method
-    @objc func pressedButtonAction(sender: Any!) {
-        slamPerformAction(self)
-
-        guard let title = slamTaskTitle,
-            title.isNotEmpty,
-            let app = slamSharedMacApp else { return }
-            
-        app.appRunTask(referral: self, with: title, forWindow: nil)
+    /// Set text to given string with underline attribute
+    /// - Parameter text: String to use to underline
+    public func underline(text: String) {
+        let attributeString: NSMutableAttributedString =  NSMutableAttributedString(string:text)
+        attributeString.addAttribute(NSAttributedString.Key.underlineStyle, value: 1, range: NSMakeRange(0, attributeString.length))
+        attributedStringValue = attributeString
     }
-
+    
 }
-
 

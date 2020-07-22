@@ -1,9 +1,9 @@
 //
-//  SlamButton.swift
+//  SlamPullDownButton.swift
 //  SlamMacOSKit
 //
-//  Created by Sheets, Steve on 5/28/17.
-//  Copyright © 2020 Sheets, Steve. All rights reserved.
+//  Created by Steve Sheets on 4/19/20.
+//  Copyright © 2020 Steve Sheets. All rights reserved.
 //
 
 import Cocoa
@@ -11,8 +11,8 @@ import SlamKit
 
 // MARK: Class
 
-/// Closure based button
-public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableable, SlamLabelable, SlamActionable, SlamTaskable {
+/// Closure labeled based button that has drop down menu with Tasks on it
+public class SlamPullDownButton: NSPopUpButton, SlamReferable, SlamEnableable, SlamLabelable, SlamVisibleable, SlamMenuItemable {
 
     // MARK: SlamReferable requirements
     
@@ -73,52 +73,39 @@ public class SlamButton: NSButton, SlamReferable, SlamVisibleable, SlamEnableabl
 
     public var slamLabelDataSource: SlamKit.ActionStringClosure?
 
-    // MARK: SlamActionable
+    // MARK: SlamMenuItemable Requirment
     
-    public var slamActionClosure: SlamKit.ActionClosure?
-    
-    // MARK: SlamTaskable Requirement
-    
-    @IBInspectable public var slamTaskTitle: String? = nil
+    public func addTaskMenuItem(command: String, title: String, word: String? = nil, tag: Int? = nil) {
+        if let aMenu = menu {
+            let aMenuItem = SlamMenuItem(title: title, action: nil, keyEquivalent: "")
+            aMenuItem.slamTaskTitle = command
+            if let word = word {
+                aMenuItem.slamWord = word
+            }
+            if let tag = tag {
+                aMenuItem.slamTag = tag
+            }
+            aMenu.addItem(aMenuItem)
+        }
+    }
+        
+    public func addTaskSeperator() {
+        if let aMenu = menu {
+            aMenu.addItem(NSMenuItem.separator())
+        }
+    }
 
     // MARK: Lifecycle Functions
     
     override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
         
-        self.setButtonType(.momentaryPushIn)
-        self.allowsMixedState = false
-        if self.target == nil {
-            self.target = self
-            self.action = #selector(pressedButtonAction)
-        }
+        pullsDown = true
     }
     
-    required public init?(coder: NSCoder) {
+    required init?(coder: NSCoder) {
         super.init(coder: coder)
         
-        self.setButtonType(.momentaryPushIn)
-        self.allowsMixedState = false
-        if self.target == nil {
-            self.target = self
-            self.action = #selector(pressedButtonAction)
-        }
+        pullsDown = true
     }
-    
-    // MARK: Action Functions
-    
-    /// Action to invoked with user presses button.
-    /// - Parameter sender: Object that invoked the method
-    @objc func pressedButtonAction(sender: Any!) {
-        slamPerformAction(self)
-
-        guard let title = slamTaskTitle,
-            title.isNotEmpty,
-            let app = slamSharedMacApp else { return }
-            
-        app.appRunTask(referral: self, with: title, forWindow: nil)
-    }
-
 }
-
-

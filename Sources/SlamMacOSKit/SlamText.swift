@@ -9,7 +9,7 @@
 import Cocoa
 import SlamKit
 
-// MARK: - Class
+// MARK: Class
 
 /// Slam Based Text View
 public class SlamText: NSTextView, NSTextDelegate, NSTextViewDelegate, SlamReferable, SlamVisibleable, SlamTextInputable {
@@ -37,14 +37,14 @@ public class SlamText: NSTextView, NSTextDelegate, NSTextViewDelegate, SlamRefer
     
     public var slamVisibleDataSource: SlamKit.ActionBoolClosure?
 
-    public func slamUpdateUI() {
+    public func slamUpdateUI(reload: Bool) {
         var ui = self
         
         ui.slamUpdateVisible()
         ui.slamUpdateTextInput()
     }
 
-    // MARK: - SlamTextInputable Requirements
+    // MARK: SlamTextInputable Requirements
     
     public var slamTextState: String {
         get {
@@ -61,7 +61,7 @@ public class SlamText: NSTextView, NSTextDelegate, NSTextViewDelegate, SlamRefer
     
     public var slamTextChangedEvent: SlamKit.InformStringClosure?
 
-    // MARK: - Lifecycle
+    // MARK: Lifecycle
 
     public override init(frame frameRect: NSRect) {
         super.init(frame: frameRect)
@@ -75,7 +75,7 @@ public class SlamText: NSTextView, NSTextDelegate, NSTextViewDelegate, SlamRefer
         delegate = self
     }
 
-    // MARK: - NSTextDelegate
+    // MARK: NSTextDelegate
 
     public func textDidChange(_ notification: Notification) {
         if let block = slamTextChangedEvent {

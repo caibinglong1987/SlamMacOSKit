@@ -1,20 +1,17 @@
 //
-//  SlamView.swift
+//  SlamBoxView.swift
 //  SlamMacOSKit
 //
-//  Created by Steve Sheets on 2/4/18.
+//  Created by Steve Sheets on 4/14/20.
 //  Copyright © 2020 Steve Sheets. All rights reserved.
 //
 
 import Cocoa
 import SlamKit
 
-// MARK: Class
-
-/// Closure based simple view.
-public class SlamView: NSView, SlamReferable, SlamVisibleable {
+public class SlamBoxView: NSBox, SlamReferable, SlamVisibleable  {
     
-    // MARK: SlamReferable Requirments
+    // MARK: SlamReferable requirements
     
     @IBInspectable public var slamReferral: String = ""
 
@@ -37,9 +34,9 @@ public class SlamView: NSView, SlamReferable, SlamVisibleable {
     
     public var slamVisibleDataSource: SlamKit.ActionBoolClosure?
 
-    public func slamUpdateUI(reload: Bool) {
+    public func slamUpdateUI(reload: Bool){
         var ui = self
-    
+        
         ui.slamUpdateVisible()
     }
 

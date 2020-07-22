@@ -9,7 +9,7 @@
 import Cocoa
 import SlamKit
 
-// MARK: - Class
+// MARK: Class
 
 /// Structure holding named list of Hierachys
 open class SlamHierachyList: NSObject, SlamHierarchable {
