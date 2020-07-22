@@ -101,9 +101,6 @@ public struct SlamTableCellView {
         let aImageView = NSImageView(image: image)
         aImageView.frame = aImageRect
         aImageView.isEditable = false
-        if #available(OSX 10.15, *) {
-            aImageView.isBordered = false
-        }
 
         view.textField = aTextField
         view.imageView = aImageView

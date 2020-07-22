@@ -11,7 +11,7 @@ import SlamKit
 
 // MARK: Class
 
-public class SlamSplit: NSSplitView, NSSplitViewDelegate, SlamReferable, SlamVisibleable, SlamViewContainable {    
+public class SlamSplit: NSSplitView, NSSplitViewDelegate, SlamReferable, SlamVisibleable {
 
     // MARK: SlamReferable Requirement
     
@@ -42,28 +42,6 @@ public class SlamSplit: NSSplitView, NSSplitViewDelegate, SlamReferable, SlamVis
         ui.slamUpdateVisible()
     }
 
-    // MARK: SlamViewContainable Requirement
-    
-    public var containerCount: Int {
-        get {
-            return arrangedSubviews.count
-        }
-        set(value) {
-        }
-    }
-    
-    public func containerLoad(view: NSView, position: Int) {
-        // later
-    }
-    
-    public func containerLoad(viewController: NSViewController, position: Int) {
-        // later
-    }
-    
-    public func containerRemove(position: Int) {
-        // later
-    }
-    
     // MARK: Public Properties
     
     @IBInspectable var minFirst: Int = 10000

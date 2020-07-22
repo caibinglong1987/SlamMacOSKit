@@ -3,7 +3,7 @@
 //  SlamMacOSKit
 //
 //  Created by Steve Sheets on 2/13/18.
-//  Copyright © 2018 Zodiac Innovations. All rights reserved.
+//  Copyright © 2020 Steve Sheets. All rights reserved.
 //
 
 import Cocoa
