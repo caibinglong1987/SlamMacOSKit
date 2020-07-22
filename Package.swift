@@ -19,7 +19,7 @@ let package = Package(
     targets: [
         .target(
             name: "SlamMacOSKit",
-            dependencies: []),
+            dependencies: ["SlamKit"]),
         .testTarget(
             name: "SlamMacOSKitTests",
             dependencies: ["SlamKit", "SlamMacOSKit"]),
