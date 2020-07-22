@@ -52,7 +52,9 @@ public struct SlamTableCellView {
         
         let aTextField = NSTextField(frame: aRect)
         aTextField.isEditable = false
-        aTextField.isBordered = false
+        if #available(OSX 10.15, *) {
+            aTextField.isBordered = false
+        }
         aTextField.backgroundColor = .clear
         aTextField.textColor = color
         aTextField.stringValue = text
@@ -88,7 +90,9 @@ public struct SlamTableCellView {
         let aTextRect = NSRect(x: 20, y: 0, width: width-20, height: 17)
         let aTextField = NSTextField(frame: aTextRect)
         aTextField.isEditable = false
-        aTextField.isBordered = false
+        if #available(OSX 10.15, *) {
+            aTextField.isBordered = false
+        }
         aTextField.backgroundColor = .clear
         aTextField.textColor = color
         aTextField.stringValue = text
@@ -96,8 +100,10 @@ public struct SlamTableCellView {
         let aImageRect = NSRect(x: 0, y: 0, width: 20, height: 17)
         let aImageView = NSImageView(image: image)
         aImageView.frame = aImageRect
-        aTextField.isEditable = false
-        aTextField.isBordered = false
+        aImageView.isEditable = false
+        if #available(OSX 10.15, *) {
+            aImageView.isBordered = false
+        }
 
         view.textField = aTextField
         view.imageView = aImageView

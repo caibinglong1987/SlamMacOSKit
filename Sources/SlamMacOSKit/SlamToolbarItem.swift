@@ -66,10 +66,12 @@ import SlamKit
             isEnabled = flag
         }
 
-        if let block = task.taskMark {
-            let flag = block(self)
+        if #available(OSX 10.15, *) {
+            if let block = task.taskMark {
+                let flag = block(self)
         
-            isBordered = flag
+                isBordered = flag
+            }
         }
     }
     

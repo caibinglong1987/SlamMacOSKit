@@ -14,7 +14,7 @@ let package = Package(
             targets: ["SlamMacOSKit"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/magesteve/SlamKit.git", from: "0.0.4"),
+        .package(url: "https://github.com/magesteve/SlamKit.git", from: "1.0.0"),
     ],
     targets: [
         .target(
